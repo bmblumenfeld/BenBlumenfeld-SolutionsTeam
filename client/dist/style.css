@@ -1,0 +1,11 @@
+.container{
+    background-image: url('../project-files/resources/graphics/background.png');
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#app{
+    background:pink;
+}

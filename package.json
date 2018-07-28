@@ -1,0 +1,30 @@
+{
+  "name": "solutions-hiring-assignment",
+  "version": "1.0.0",
+  "description": "This is the hiring assignment for the Solutions Team at Algolia. It&rsquo;s intended to mimic work you might do here, while giving us an understanding of your skills in:",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "dev-react": "webpack -d --watch"
+  },
+  "dependencies": {
+    "algoliasearch": "^3.29.0",
+    "algoliasearch-helper": "^2.26.1",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.7",
+    "nodemon": "^1.15.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.40",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-eslint": "^8.2.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.11.0"
+  }
+}
