@@ -1,14 +1,14 @@
+require('dotenv').config();
 const algoliaSearch = require('algoliasearch');
 const csvtojson = require('csvtojson');
+const {chunk} = require('lodash');
 const converter = csvtojson({ delimiter:";", toArrayString:true });
-const {chunk} = require('lodash')
-const fs = require('fs');
-const appId = 'AV3MD25BGV';
-const apiKey = 'b80526ff55201410551970c94d92b0d0';
+const appId = `${process.env.ALGOLIA_APP_ID}`;
+const apiKey = `${process.env.ADMIN_API_KEY}`;
 let client = algoliaSearch(appId, apiKey);
 const index = client.initIndex('restaurants');
 const restaurantsList = require('./project-files/resources/dataset/restaurants_list.json');
-const rInfoPath = './project-files/resources/dataset/restaurants_info.csv'
+const rInfoPath = './project-files/resources/dataset/restaurants_info.csv';
 
 converter
 .fromFile(rInfoPath)
@@ -16,7 +16,7 @@ converter
   
   let totalInfo = restaurantsList.map(x => Object.assign(x, infoArr.find(y => Number(y.objectID) === x.objectID)));
 
-  const chunks = chunk(totalInfo, 10);
+  const chunks = chunk(totalInfo, 500);
 
   chunks.map(function(batch) {
     return index.addObjects(batch, function(err, content) {

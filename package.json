@@ -11,6 +11,7 @@
     "algoliasearch": "^3.29.0",
     "algoliasearch-helper": "^2.26.1",
     "csvtojson": "^2.0.7",
+    "dotenv": "^6.0.0",
     "express": "^4.16.2",
     "lodash": "^4.17.10",
     "mongoose": "^5.0.7",
