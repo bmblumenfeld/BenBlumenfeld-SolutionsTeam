@@ -29,19 +29,24 @@ converter
 })
 index.setSettings({
   hitsPerPage: 3,
-  attributesForFaceting: ['food_type', 'stars_count', 'payment_options', 'price_range'],
+  attributesForFaceting: ['food_type', 'stars_count', 'payment_options', 'price_range','price'],
   searchableAttributes: [
     'name',
-    'city',
-    'country',
-    'iata_code',
     'food_type',
+    'neighborhood',
+    'city',
+    'state',
+    'country',
     'stars_count', 
     'payment_options', 
-    'pricepayment_options', 
-    'price_range'
+    'price_range',
+    'price'
   ],
-  maxValuesPerFacet: 10,
+  customRanking: [
+    'desc(stars_count)',
+    'desc(reviews_count)'
+  ],
+  maxValuesPerFacet: 1000,
   paginationLimitedTo: 0,
   }, function(err) {
     if (!err) {
