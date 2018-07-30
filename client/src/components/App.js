@@ -1,7 +1,6 @@
 import algoliaSearch from 'algoliasearch';
 import algoliaSearchHelper from 'algoliasearch-helper';
 import React from 'react';
-// import {connect} from 'react-algoliasearch-helper';
 import Stars from 'react-star-rating-component';
 
 
@@ -23,9 +22,9 @@ const connect = reactAlgoliaSearchHelper.connect;
 
 const SearchBox = connect()(
     ({helper}) =>
-    <div className="search-container">
+    <div className="search-box">
       <input
-        className="search-box"
+        className="search-input"
         placeholder="Search for Restaurants by Name, Cuisine, Location"
         onChange={e => helper.setQuery(e.target.value).search()}
       />
@@ -42,18 +41,18 @@ const Hit = ({hit}) => (
       <div className="details">
         <div className="name"><strong>{hit.name}</strong></div>
         <div className="upper-details">
-          <div className="stars">{hit.stars_count}&nbsp;</div>
+        <div className="stars">{hit.stars_count}&nbsp;</div>
           <Stars 
               starCount={5}
               value={hit.stars_count}
               emptyStarColor={'rgb(150, 150, 150)'}
           />
-          <div className="reviews">&nbsp;({hit.reviews_count} reviews)</div>
+          <div className="reviews">({hit.reviews_count} reviews)</div>
         </div>
         <div className="lower-details">
-          <div className="food-type">{hit.food_type}&nbsp;|&nbsp;</div>
-          <div className="neighborhood">{hit.neighborhood}&nbsp;|&nbsp;</div>
-          <div className="price">{hit.price_range}</div><br />
+            <div className="food-type">{hit.food_type}&nbsp;|&nbsp;</div>
+            <div className="neighborhood">{hit.neighborhood}&nbsp;|&nbsp;</div>
+            <div className="price">{hit.price_range}</div><br />
         </div>
       </div>
     </div>
@@ -73,28 +72,32 @@ const Pagination = connect(({searchResults}) => (
       {page: 0, nbPages: 0} :
       {page: searchResults.page, nbPages: searchResults.nbPages}))(
   ({page, nbPages, helper}) =>
+    page === 0? <div className="pager">
+     <button  
+      onClick={e => helper.setPage(page + 1).search()} 
+      disabled={page + 1 >= nbPages}>Show More</button> 
+      </div> :
     <div className="pager">
-      <button className="next" 
+      <button 
+      onClick={e => helper.setPage(page - 1).search()} 
+      disabled={page === 0}>Previous</button>
+      <button  
       onClick={e => helper.setPage(page + 1).search()} 
       disabled={page + 1 >= nbPages}>Show More</button>
     </div>
 );
 const Category = ({name, count, isRefined, handleClick}) => (
-    <div>
-      <li>
         <div onClick={handleClick} className="category">
-          <div><span className="category-name">{name}&nbsp;</span></div>
-          <div><span className="badge">{count}</span></div>
+          <span className="category-name">{name}</span>
+          <span className="badge">{count}</span>
         </div>
-      </li>
-    </div>
   )
 
 const Categories = connect(state => ({ 
     categories: state.searchResults &&
       state.searchResults.getFacetValues('food_type', {sortBy: ['count:desc', 'selected']}) || [] }) )(
     ({categories, helper}) =>
-      <ul className="categories">
+      <div>
         <h3>Cuisine/Food Type</h3>
         {categories.map(
           category =>
@@ -104,8 +107,14 @@ const Categories = connect(state => ({
               handleClick={()=> helper.toggleRefine('food_type', category.name).search()}
             />
         )}
-        <h3>Rating</h3>
-      </ul>
+        <h3>Price</h3>
+            <div className="price-buttons">
+                <button onClick={()=>helper.toggleRefine('price', 1).search()}className="price-button">$</button>
+                <button onClick={()=>helper.toggleRefine('price', 2).search()}className="price-button">$$</button>
+                <button onClick={()=>helper.toggleRefine('price', 3).search()}className="price-button">$$$</button>
+                <button onClick={()=>helper.toggleRefine('price', 4).search()}className="price-button">$$$$</button>
+            </div>
+      </div>
   );
 
   
@@ -116,9 +125,8 @@ class App extends React.Component{
     }
 
     componentWillMount(){
-        console.log(helper.getQuery().query === '')
-        console.log(navigator)
-        navigator.geolocation.getCurrentPosition(()=>{console.log('success')},()=>{console.log('failed')})
+        // navigator.geolocation.getCurrentPosition(()=>{console.log('success')},()=>{console.log('failed')})
+        helper.search();
     }
 
     render(){
@@ -126,9 +134,15 @@ class App extends React.Component{
             <Provider helper={helper}>
                 <div className = "container">
                     <SearchBox/>
-                    <Hits/>
-                    <Pagination/>
-                    <Categories/>
+                    <div className="results-content">
+                        <div className="catagories">
+                            <Categories/>
+                        </div>
+                        <div className="results">
+                            <Hits/>
+                            <Pagination/>    
+                        </div>
+                     </div>
                 </div>
             </Provider>
         );

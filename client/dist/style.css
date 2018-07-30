@@ -1,7 +1,149 @@
-.container{
-    background-image: url('../../project-files/resources/graphics/background.png');
-    flex-direction: column;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    background: url("https://bmblumenfeld.github.io/BenBlumenfeld-SolutionsTeam/project-files/resources/graphics/background.png") repeat;
 }
+ 
+.container {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    width: 70vw;
+    height: auto;
+    top: 3em;
+    margin: auto;
+    position: relative;
+    background: #fff;
+
+}
+    .container .search-box {
+      background: #006280;
+      width: 100%; }
+    .container .search-input {
+      font-size: 18px;
+      font-weight: 100;
+      padding: 1em 0.75em;
+      margin: 30px;
+      width: -webkit-fill-available;
+      appearance: none;
+      border: none;
+      background: #fff;
+      border-radius: 4px;
+      text-overflow: ellipsis; }
+    .container .results-content {
+      display: flex;
+      flex-direction: row;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      max-height: 550px; 
+    }
+    .price-buttons{
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    h3 {
+        margin-left:15px;
+    }
+    .categories{
+        display:flex;
+        flex-direction: column;
+        align-content: center;
+        margin:20px;
+    }
+    .category{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin:15px;
+        border-radius: 5%;
+    }
+    .category:hover{
+        background: #006280;
+    }
+    .badge {
+        color: grey;
+        font-size: 14px; 
+    }
+    .results {
+      position: relative;
+      margin-right: 0;
+      max-width: 100%;
+      width: 100%;
+      overflow: auto;
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      border: none;
+      border-left: 1px solid #aaaaaa; 
+    }
+    .container .results .hits {
+        border: none;
+        padding-left: 40px; 
+    }
+    .container .results .hit {
+        position: relative;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        padding: 10px 0; 
+    }
+    .container .results img {
+        height: 110px;
+        width: 110px;
+        margin-right: 20px;
+        border-radius: 5%; 
+    }
+    .container .results .details {
+        display: flex;
+        flex-direction: column;
+        width: 100%; 
+    }
+    .container .results .upper-details {
+        display: flex;
+        flex-direction: row;
+        color: #969696;
+        font-weight: 100; 
+        font-size: 14px;
+    }
+
+    .container .results .lower-details {
+        display: flex;
+        flex-direction: row;
+        color: #969696;
+        font-weight: 100; 
+        font-size: 14px;
+    }
+    .container .pager {
+      width: 260px;
+      margin: 0 auto;
+      padding: 1em;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap; 
+    }
+      .container .pager button,
+      .container .pager span {
+        flex: 33%; }
+    .container .pager button {
+        color: #969696;
+        appearance: none;
+        -webkit-appearance: none;
+        border: 1px solid #969696;
+        padding: 0.5em 0.25em;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 18px;
+        width: 80px; 
+    }
+    .container .pager button:hover {
+          background: #d9d9d9; 
+    }
+    .container .pager span {
+        line-height: 32px;
+        font-weight: bold; 
+    } 
+
